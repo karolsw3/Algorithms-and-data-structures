@@ -1,6 +1,10 @@
 /*
 * The merge sort algorithm
-* Time complexity: O(n log(n))
+* Time complexity:
+*   Best case: O(n log(n))
+*   Worst case: O(n log(n))
+*   Average: O(n log(n))
+* Space complexity: O(n)
 */
 
 function mergeSort (array) {

@@ -1,6 +1,10 @@
 /*
 * The bubble sort algorithm
 * Time complexity: O(n^2)
+*   Best case: O(n)
+*   Worst case: O(n^2)
+*   Average: O(n^2)
+* Space complexity: O(1)
 */
 
 function bubbleSort (array) {
