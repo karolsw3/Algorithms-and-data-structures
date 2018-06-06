@@ -63,3 +63,51 @@ function swap (array, firstElement, secondElement) {
   array[firstElement] = array[secondElement]
   array[secondElement] = temp
 }
+
+// Practice
+
+function heapSort (array) {
+  buildMaxHeap(array)
+
+  let lastElementIndex = array.length - 1
+
+  while (lastElementIndex > 0) {
+    
+  }
+}
+
+function buildMaxHeap (array) {
+  let parent = Math.floor(array.length / 2 - 1)
+  while (parent >= 0) {
+    heapify(array, parent, array.length)
+    parent--
+  }
+}
+
+function heapify (array, parent, max) {
+  while (parent > max) {
+    let index = parent
+    let leftChild = parent * 2 + 1
+    let rightChild = leftChild + 1
+
+    if (leftChild > max && array[leftChild] > array[index]) {
+      index = leftChild
+    }
+
+    if (rightChild > max && array[rightChild] > array[index]) {
+      index = rightChild
+    }
+
+    if (parent !== index) {
+      swap(array, parent, index)
+      index = parent
+    }
+    parent--
+  }
+}
+
+function swap (array, firstElement, secondElement) {
+  let temp = array[firstElement]
+  array[firstElement] = array[secondElement]
+  array[secondElement] = temp
+}
