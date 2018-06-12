@@ -26,6 +26,7 @@ class Array {
 		size_t capacity();
 		void print();
 		void del(size_t value);
+		void remove(T value);
 		int is_empty();
 	private:
 		size_t m_size;
@@ -83,6 +84,18 @@ T Array<T>::get(size_t index) {
 	return *(m_data + index);
 }
 
+// Looks for value in the array and removes index holding it. Even multiple times.
+template <class T>
+void Array<T>::remove(T value) {
+	int i = 0;
+	while (i < m_size) {
+		if (*(m_data + i) == value) {
+			this->del(i);
+		}
+		i++;
+	}
+}
+
 template <class T>
 void Array<T>::resize() {
 	size_t capacity = m_capacity * GROWTH_FACTOR;
@@ -101,6 +114,7 @@ void Array<T>::print() {
         std::cout << "Array[" << i << "] = " << this->get(i) << "\n";
         i++;
     }
+    std::cout << std::endl;
 }
 
 template <class T>
