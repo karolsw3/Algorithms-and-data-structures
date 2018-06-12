@@ -28,6 +28,7 @@ class Array {
 		void del(size_t value);
 		void remove(T value);
 		int is_empty();
+		int find(T value);
 	private:
 		size_t m_size;
 		size_t m_capacity;
@@ -87,13 +88,26 @@ T Array<T>::get(size_t index) {
 // Looks for value in the array and removes index holding it. Even multiple times.
 template <class T>
 void Array<T>::remove(T value) {
-	int i = 0;
+	size_t i = 0;
 	while (i < m_size) {
 		if (*(m_data + i) == value) {
 			this->del(i);
 		}
 		i++;
 	}
+}
+
+// Find the first occurence of a value and return its index. If nothing is found - return -1
+template <class T>
+int Array<T>::find(T value) {
+	size_t i = 0;
+	while (i < m_size) {
+		if (*(m_data + i) == value) {
+			return i;
+		}
+		i++;
+	}
+	return -1;
 }
 
 template <class T>
