@@ -25,6 +25,7 @@ class Array {
 		size_t size();
 		size_t capacity();
 		void print();
+		void del(size_t value);
 		int is_empty();
 	private:
 		size_t m_size;
@@ -66,6 +67,15 @@ void Array<T>::set(size_t index, T value) {
     while (index >= m_size)
         this->push(0);
     *(m_data + index) = value;
+}
+
+template <class T>
+void Array<T>::del(size_t index) {
+	m_size--;
+	while (index < m_size) {
+		*(m_data + index) = *(m_data + index + 1);
+		index++;
+	}
 }
 
 template <class T>
