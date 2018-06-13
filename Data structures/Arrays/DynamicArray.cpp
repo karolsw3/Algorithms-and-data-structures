@@ -135,3 +135,16 @@ template <class T>
 int Array<T>::is_empty() {
     return m_size == 0;
 }
+
+int main () {
+	Array<int> array;
+	array.push(3);
+	array.push(4);
+	array.push(5);
+	array.push(4);
+	array.push(2);
+	array.push(4);
+	array.print();
+	std::cout << array.find(4);
+	return 0;
+}
