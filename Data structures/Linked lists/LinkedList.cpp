@@ -15,6 +15,7 @@ class LinkedList {
 		int size();
 		void push_back(int value);
 		void push_front(int value);
+		int pop_front();
 		void print();
 		bool empty();
 		int value_at(int index);
@@ -35,6 +36,13 @@ void LinkedList::push_front (int data) {
 	node->next = this->front;
 	this->front = node;
 	this->length++; 
+}
+
+// Remove front item and return its value
+int LinkedList::pop_front () {
+	int output = this->front->data;
+	this->front = this->front->next;
+	return output;
 }
 
 // Return number of nodes in the list
@@ -69,6 +77,9 @@ int LinkedList::value_at (int index) {
 
 int main() {
 	LinkedList* list = new LinkedList();
+	list->push_front(4);
+	list->push_front(2);
+	list->pop_front();
 	list->print();
 	std::cout << "Value at index 0: " << list->value_at(0);
 	return 0;
