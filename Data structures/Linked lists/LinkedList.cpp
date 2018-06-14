@@ -16,6 +16,7 @@ class LinkedList {
 		void add(int value);
 		void print();
 		bool empty();
+		int value_at(int index);
 };
 
 LinkedList::LinkedList () {
@@ -48,6 +49,7 @@ void LinkedList::print () {
 	}
 }
 
+// Check whether the list is empty
 bool LinkedList::empty () {
 	if (this->length == 0) {
 		return true;
@@ -55,9 +57,22 @@ bool LinkedList::empty () {
 	return false;
 }
 
+// Check the value of the nth element (starting from 0)
+int LinkedList::value_at (int index) {
+	Node* currentNode = this->end;
+	for (int i = this->length - 1; i > index; i--) {
+		currentNode = currentNode->next;
+	}
+	return currentNode->data;
+}
+
 int main() {
 	LinkedList* list = new LinkedList();
+	list->add(4);
+	list->add(12);
+	list->add(23);
+	list->add(2);
 	list->print();
-	std::cout << list->empty();
+	std::cout << "Value at index 0: " << list->value_at(0);
 	return 0;
 }
