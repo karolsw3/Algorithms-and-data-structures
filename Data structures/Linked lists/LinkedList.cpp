@@ -12,6 +12,7 @@ class LinkedList {
 
 		LinkedList();
 		~LinkedList();
+		int size();
 		void add(int value);
 		void print();
 };
@@ -33,10 +34,15 @@ void LinkedList::add (int data) {
 	this->length++; 
 }
 
+// Return number of nodes in the list
+int LinkedList::size () {
+	return this->length;
+}
+
 void LinkedList::print () {
 	Node* currentNode = this->end;
 	for (int i = 0; i < this->length; i++) {
-		std::cout << currentNode->data;
+		std::cout << currentNode->data << std::endl;
 		currentNode = currentNode->next;
 	}
 }
@@ -46,5 +52,6 @@ int main() {
 	list->add(4);
 	list->add(5);
 	list->print();
+	std::cout << list->size();
 	return 0;
 }
