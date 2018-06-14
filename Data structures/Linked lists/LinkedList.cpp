@@ -38,6 +38,17 @@ void LinkedList::push_front (int data) {
 	this->length++; 
 }
 
+void LinkedList::push_back (int data) {
+	Node* currentNode = this->front;
+	for (int i = 0; i < this->length - 1; i++) {
+		currentNode = currentNode->next;
+	}
+	Node* node = new Node();
+	node->data = data;
+	currentNode->next = node;
+	this->length++;
+}
+
 // Remove front item and return its value
 int LinkedList::pop_front () {
 	int output = this->front->data;
@@ -79,8 +90,7 @@ int main() {
 	LinkedList* list = new LinkedList();
 	list->push_front(4);
 	list->push_front(2);
-	list->pop_front();
+	list->push_back(99);
 	list->print();
-	std::cout << "Value at index 0: " << list->value_at(0);
 	return 0;
 }
