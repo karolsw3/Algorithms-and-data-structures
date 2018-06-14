@@ -15,6 +15,7 @@ class LinkedList {
 		int size();
 		void add(int value);
 		void print();
+		bool empty();
 };
 
 LinkedList::LinkedList () {
@@ -47,11 +48,16 @@ void LinkedList::print () {
 	}
 }
 
+bool LinkedList::empty () {
+	if (this->length == 0) {
+		return true;
+	}
+	return false;
+}
+
 int main() {
 	LinkedList* list = new LinkedList();
-	list->add(4);
-	list->add(5);
 	list->print();
-	std::cout << list->size();
+	std::cout << list->empty();
 	return 0;
 }
