@@ -22,6 +22,7 @@ class LinkedList {
 		void print();
 		bool empty();
 		int value_at(int index);
+		void insert(int index, int value);
 };
 
 LinkedList::LinkedList () {
@@ -88,6 +89,20 @@ int LinkedList::get_back () {
 	return this->value_at(this->length - 1);
 }
 
+// Insert value at index, so current item at that index is pointed to by new item at index
+void LinkedList::insert (int index, int value) {
+	Node* node = new Node();
+	node->data = value;
+
+	Node* currentNode = this->front;
+	for (int i = 0; i < index - 1; i++) {
+		currentNode = currentNode->next;
+	}
+	node->next = currentNode->next;
+	currentNode->next = node;
+	this->length++;
+}
+
 void LinkedList::print () {
 	Node* currentNode = this->front;
 	for (int i = 0; i < this->length; i++) {
@@ -113,12 +128,16 @@ int LinkedList::value_at (int index) {
 	return currentNode->data;
 }
 
+
+
 int main() {
 	LinkedList* list = new LinkedList();
-	list->push_front(4);
+	list->push_front(1);
 	list->push_front(2);
-	list->push_back(99);
+	list->push_front(3);
+	list->push_front(4);
+	list->push_front(5);
+	list->insert(3, 100);
 	list->print();
-	std::cout << "thefirst item: " << list->get_front();
 	return 0;
 }
