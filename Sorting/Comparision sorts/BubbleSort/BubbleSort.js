@@ -9,13 +9,16 @@
 
 function bubbleSort (array) {
   for (let i = array.length; i > 0; i--) {
+    let swapped = false
     for (let j = 0; j < i; j++) {
       if (array[j + 1] < array[j]) {
         let temp = array[j + 1]
         array[j + 1] = array[j]
         array[j] = temp
+        swapped = true
       }
     }
+    if (!swapped) break
   }
   return array
 }
