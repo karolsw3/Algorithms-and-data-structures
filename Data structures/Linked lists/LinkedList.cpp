@@ -16,6 +16,7 @@ class LinkedList {
 		void push_back(int value);
 		void push_front(int value);
 		int pop_front();
+		int pop_back();
 		void print();
 		bool empty();
 		int value_at(int index);
@@ -56,6 +57,18 @@ int LinkedList::pop_front () {
 	return output;
 }
 
+// Remove back item and return its value
+int LinkedList::pop_back () {
+	Node* currentNode = this->front;
+	for (int i = 0; i < this->length - 2; i++) {
+		currentNode = currentNode->next;
+	}
+	int output = currentNode->next->data;
+	delete currentNode->next;
+	currentNode->next = NULL;
+	return output;
+}
+
 // Return number of nodes in the list
 int LinkedList::size () {
 	return this->length;
@@ -91,6 +104,7 @@ int main() {
 	list->push_front(4);
 	list->push_front(2);
 	list->push_back(99);
+	list->pop_back();
 	list->print();
 	return 0;
 }
