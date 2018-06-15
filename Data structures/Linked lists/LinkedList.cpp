@@ -17,6 +17,8 @@ class LinkedList {
 		void push_front(int value);
 		int pop_front();
 		int pop_back();
+		int get_front();
+		int get_back();
 		void print();
 		bool empty();
 		int value_at(int index);
@@ -54,6 +56,7 @@ void LinkedList::push_back (int data) {
 int LinkedList::pop_front () {
 	int output = this->front->data;
 	this->front = this->front->next;
+	this->length--;
 	return output;
 }
 
@@ -66,12 +69,23 @@ int LinkedList::pop_back () {
 	int output = currentNode->next->data;
 	delete currentNode->next;
 	currentNode->next = NULL;
+	this->length--;
 	return output;
 }
 
 // Return number of nodes in the list
 int LinkedList::size () {
 	return this->length;
+}
+
+// Return the value of the front item
+int LinkedList::get_front () {
+	return this->front->data;
+}
+
+// Return the value of the last item
+int LinkedList::get_back () {
+	return this->value_at(this->length - 1);
 }
 
 void LinkedList::print () {
@@ -104,7 +118,7 @@ int main() {
 	list->push_front(4);
 	list->push_front(2);
 	list->push_back(99);
-	list->pop_back();
 	list->print();
+	std::cout << "thefirst item: " << list->get_front();
 	return 0;
 }
