@@ -23,6 +23,7 @@ class LinkedList {
 		bool empty();
 		int value_at(int index);
 		void insert(int index, int value);
+		void erase(int index);
 };
 
 LinkedList::LinkedList () {
@@ -103,6 +104,16 @@ void LinkedList::insert (int index, int value) {
 	this->length++;
 }
 
+void LinkedList::erase (int index) {
+	Node* currentNode = this->front;
+	for (int i = 0; i < index - 1; i++) {
+		currentNode = currentNode->next;
+	}
+	delete currentNode->next;
+	currentNode->next = NULL;
+	this->length--;
+}
+
 void LinkedList::print () {
 	Node* currentNode = this->front;
 	for (int i = 0; i < this->length; i++) {
@@ -137,7 +148,8 @@ int main() {
 	list->push_front(3);
 	list->push_front(4);
 	list->push_front(5);
-	list->insert(3, 100);
+	list->print();
+	list->erase(3);
 	list->print();
 	return 0;
 }
