@@ -141,12 +141,24 @@ int LinkedList::value_at (int index) {
 }
 
 // Returns the value of the node at nth position from the end of the list
-int LinkedList::value_n_from_end(int n) { // Counting from n = 0
+int LinkedList::value_n_from_end (int n) { // Counting from n = 0
 	Node* currentNode = this->front;
 	for (int i = 0; i < this->length - n - 1; i++) {
 		currentNode = currentNode->next;
 	}
-	return currentNode->data;	
+	return currentNode->data;
+}
+
+// Removes the first item in the list with this value
+void LinkedList::remove_value (int value) {
+	Node* currentNode = this->front;
+	for (int i = 0; i < this->length; i++) {
+		if (currentNode->data == value) {
+			this->erase(i);
+			break;
+		}
+		currentNode = currentNode->next;
+	}
 }
 
 // Just random tests
@@ -157,7 +169,7 @@ int main() {
 	list->push_front(3);
 	list->push_front(4);
 	list->push_front(5);
-	list->erase(2);
+	list->remove_value(2);
 	list->print();
 	return 0;
 }
