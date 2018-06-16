@@ -26,7 +26,24 @@ class LinkedList {
 		void erase(int index);
 		int value_n_from_end(int n);
 		void remove_value(int value);
+		void reverse();
 };
+
+// Reverses the list
+void LinkedList::reverse () {
+	Node* previousNode = NULL;
+	Node* currentNode = this->front;
+	Node* nextNode = NULL;
+
+	while (currentNode != NULL) {
+		nextNode = currentNode->next;
+		currentNode->next = previousNode;
+		previousNode = currentNode;
+		currentNode = nextNode;
+	}
+
+	this->front = previousNode;
+}
 
 LinkedList::LinkedList () {
 	this->length = 0;
@@ -169,7 +186,7 @@ int main() {
 	list->push_front(3);
 	list->push_front(4);
 	list->push_front(5);
-	list->remove_value(2);
+	list->reverse();
 	list->print();
 	return 0;
 }
