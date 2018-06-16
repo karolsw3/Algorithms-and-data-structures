@@ -24,6 +24,7 @@ class LinkedList {
 		int value_at(int index);
 		void insert(int index, int value);
 		void erase(int index);
+		int value_n_from_end(int n);
 };
 
 LinkedList::LinkedList () {
@@ -139,8 +140,16 @@ int LinkedList::value_at (int index) {
 	return currentNode->data;
 }
 
+// Returns the value of the node at nth position from the end of the list
+int LinkedList::value_n_from_end(int n) { // Counting from n = 0
+	Node* currentNode = this->front;
+	for (int i = 0; i < this->length - n - 1; i++) {
+		currentNode = currentNode->next;
+	}
+	return currentNode->data;	
+}
 
-
+// Just random tests
 int main() {
 	LinkedList* list = new LinkedList();
 	list->push_front(1);
@@ -148,8 +157,6 @@ int main() {
 	list->push_front(3);
 	list->push_front(4);
 	list->push_front(5);
-	list->print();
-	list->erase(3);
-	list->print();
+	std::cout << list->value_n_from_end(3);
 	return 0;
 }
