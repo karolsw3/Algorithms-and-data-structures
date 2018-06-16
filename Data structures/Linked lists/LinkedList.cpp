@@ -25,6 +25,7 @@ class LinkedList {
 		void insert(int index, int value);
 		void erase(int index);
 		int value_n_from_end(int n);
+		void remove_value(int value);
 };
 
 LinkedList::LinkedList () {
@@ -110,8 +111,7 @@ void LinkedList::erase (int index) {
 	for (int i = 0; i < index - 1; i++) {
 		currentNode = currentNode->next;
 	}
-	delete currentNode->next;
-	currentNode->next = NULL;
+	currentNode->next = currentNode->next->next;
 	this->length--;
 }
 
@@ -157,6 +157,7 @@ int main() {
 	list->push_front(3);
 	list->push_front(4);
 	list->push_front(5);
-	std::cout << list->value_n_from_end(3);
+	list->erase(2);
+	list->print();
 	return 0;
 }
