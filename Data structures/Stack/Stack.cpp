@@ -32,10 +32,3 @@ T Stack<T>::getTop () {
 	size_t back = this->stack.size() - 1;
 	return this->stack.at(back);
 }
-
-int main () {
-	Stack<int> stack;
-	stack.push(3);
-	std::cout << stack.pop();
-	return 0;
-}
