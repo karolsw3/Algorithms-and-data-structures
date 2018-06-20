@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-// Queue implementation using fixed-sized array
+// Queue implementation using fixed-size array
 template <typename T>
 class Queue {
   public:
