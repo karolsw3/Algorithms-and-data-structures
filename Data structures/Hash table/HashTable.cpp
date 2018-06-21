@@ -80,7 +80,7 @@ class HashTable {
     }
 
     void print () {
-      for (size_t i = 0; i < vectSize - 1; i++) {
+      for (size_t i = 0; i < vectSize; i++) {
         std::cout << "Index " << i << ": ";
         Node<Person>* currentNode = vect[i].head;
         for (size_t j = 0; j < vect[i].getSize(); j++) {
@@ -96,16 +96,17 @@ class HashTable {
     size_t vectSize;
 
     size_t hash (std::string name) {
+      const size_t G = 54;
       size_t id = 0; 
       for (char c : name) {
-        id += size_t(c);
+        id = G * id + size_t(c);
       }
       return id % vectSize;
     }
 };
 
 int main () {
-  HashTable* table = new HashTable(4);
+  HashTable* table = new HashTable(10);
   table->addPerson(new Person("Aga", 19));
   table->addPerson(new Person("Jacek", 23));
   table->addPerson(new Person("Michał", 67));
