@@ -10,13 +10,16 @@ class Person {
       age = 0;
     }
     Person (std::string newName, unsigned int newAge) {
+      // That's better.
       name = newName;
       age = newAge;
     }
     std::string getName () {
+      // What's your name?
       return name;
     }
     unsigned int getAge () {
+      // Don't ask women
       return age;
     }
   private:
@@ -42,9 +45,16 @@ class LinkedList {
       node->data = data;
       node->next = head;
       head = node;
+      size++;
     }
+    size_t getSize () {
+      return size;
+    }
+  private:
+    size_t size;
 };
 
+template <typename T>
 class HashTable {
   public:
     HashTable (size_t size) : vect(size) {
@@ -56,8 +66,13 @@ class HashTable {
     }
 
     Person* getPerson (std::string name) {
-      // Assuming that there are no collisions (yet)
-      return vect[hash(name)].head->data;
+      Node<T>* currentNode = vect[hash(name)].head;
+      for (size_t i = 0; i < vect[hash(name)].getSize(); i++) {
+        if (currentNode->data->getName() == name) {
+          return currentNode->data;
+        }
+        currentNode = currentNode->next;
+      }
     }
   private:
     std::vector<LinkedList<Person>> vect;
@@ -73,8 +88,12 @@ class HashTable {
 };
 
 int main () {
-  HashTable* table = new HashTable(10);
+  HashTable<Person>* table = new HashTable<Person>(10);
   Person* ola = new Person("Ola", 12);
   table->addPerson(ola);
-  std::cout << table->getPerson("Ola")->getAge() << std::endl;
+  table->addPerson(new Person("Aga", 19));
+  table->addPerson(new Person("Jacek", 23));
+  table->addPerson(new Person("Michał", 67));
+  table->addPerson(new Person("Baśka", 10));
+  std::cout << table->getPerson("Baśka")->getAge() << std::endl;
 }
