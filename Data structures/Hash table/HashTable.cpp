@@ -14,14 +14,21 @@ class Person {
       name = newName;
       age = newAge;
     }
+
+    std::string getId () {
+      return name + std::to_string(age);
+    }
+
     std::string getName () {
       // What's your name?
       return name;
     }
+
     unsigned int getAge () {
       // Don't ask women
       return age;
     }
+
   private:
     std::string name;
     unsigned int age;
@@ -55,6 +62,7 @@ class LinkedList {
     size_t size;
 };
 
+template <typename T>
 class HashTable {
   public:
     HashTable (size_t size) : vect(size) {
@@ -65,14 +73,14 @@ class HashTable {
       return vectSize;
     }
 
-    void addPerson (Person* person) {
-      vect[hash(person->getName())].push(person);
+    void addData (T* data) {
+      vect[hash(data->getId())].push(data);
     }
 
-    Person* getPerson (std::string name) {
-      Node<Person>* currentNode = vect[hash(name)].head;
-      for (size_t i = 0; i < vect[hash(name)].getSize(); i++) {
-        if (currentNode->data->getName() == name) {
+    T* getData (std::string id) {
+      Node<T>* currentNode = vect[hash(id)].head;
+      for (size_t i = 0; i < vect[hash(id)].getSize(); i++) {
+        if (currentNode->data->getId() == id) {
           return currentNode->data;
         }
         currentNode = currentNode->next;
@@ -82,35 +90,35 @@ class HashTable {
     void print () {
       for (size_t i = 0; i < vectSize; i++) {
         std::cout << "Index " << i << ": ";
-        Node<Person>* currentNode = vect[i].head;
+        Node<T>* currentNode = vect[i].head;
         for (size_t j = 0; j < vect[i].getSize(); j++) {
-          Person* person = currentNode->data;
-          std::cout << person->getName() << " ";
+          T* data = currentNode->data;
+          std::cout << data->getId() << " ";
           currentNode = currentNode->next;
         }
         std::cout << std::endl;
       }
     }
   private:
-    std::vector<LinkedList<Person>> vect;
+    std::vector<LinkedList<T> > vect;
     size_t vectSize;
 
-    size_t hash (std::string name) {
+    size_t hash (std::string id) {
       const size_t G = 54;
-      size_t id = 0; 
-      for (char c : name) {
-        id = G * id + size_t(c);
+      size_t hashedId = 0;
+      for(unsigned int i = 0; i < id.length(); i++) {
+        hashedId = G * hashedId + size_t(id[i]);
       }
-      return id % vectSize;
+      return hashedId % vectSize;
     }
 };
 
 int main () {
-  HashTable* table = new HashTable(10);
-  table->addPerson(new Person("Aga", 19));
-  table->addPerson(new Person("Jacek", 23));
-  table->addPerson(new Person("Michał", 67));
-  table->addPerson(new Person("Baśka", 10));
+  HashTable<Person>* table = new HashTable<Person>(10);
+  table->addData(new Person("Sue", 19));
+  table->addData(new Person("Mark", 23));
+  table->addData(new Person("Illona", 67));
+  table->addData(new Person("Sophie", 10));
   table->print();
   return 1;
 }
