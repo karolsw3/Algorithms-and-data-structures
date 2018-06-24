@@ -113,6 +113,7 @@ class HashTable {
     }
 };
 
+// TEST
 int main () {
   HashTable<Person>* table = new HashTable<Person>(10);
   table->addData(new Person("Sue", 19));
