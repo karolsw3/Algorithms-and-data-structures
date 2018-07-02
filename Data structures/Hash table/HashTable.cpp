@@ -121,5 +121,5 @@ int main () {
   table->addData(new Person("Illona", 67));
   table->addData(new Person("Sophie", 10));
   table->print();
-  return 1;
+  return 0;
 }

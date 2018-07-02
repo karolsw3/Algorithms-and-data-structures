@@ -23,5 +23,5 @@ int binarySearch (int number, int array[], unsigned int min, unsigned int max) {
 int main () {
   int array[] = {1, 4, 6, 7, 12, 15, 22, 34, 39, 43, 46, 55, 89, 102, 144, 230, 389, 563, 1039, 5902};
   std::cout << binarySearch(102, array, 0, 20);
-  return 1;
+  return 0;
 }
