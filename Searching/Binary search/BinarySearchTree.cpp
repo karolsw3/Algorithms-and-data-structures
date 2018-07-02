@@ -26,6 +26,10 @@ class BinarySearchTree {
       return searchHelper(value, root);
     }
 
+    void deleteValue (int value) {
+      deleteHelper(value, root);
+    }
+
   private:
     void insertHelper (int value, Node* root) {
       if (value > root->data) {
@@ -60,12 +64,29 @@ class BinarySearchTree {
         return true;
       }
     }
+
+    void deleteHelper (int value, Node* root) {
+      if (value > root->data) {
+        if (root->right->created) {
+          searchHelper(value, root->right);
+        }
+      } else if (value < root->data) {
+        if (root->left->created) {
+          searchHelper(value, root->left);
+        }
+      } else {
+        delete root;
+        std::cout << "Node with value '" << value << "' deleted" << std::endl;
+      }
+    }
 };
 
 int main () {
   BinarySearchTree* tree = new BinarySearchTree();
   tree->insert(5);
   tree->insert(8);
-  std::cout << tree->search(6);
+  std::cout << tree->search(5) << std::endl;
+  tree->deleteValue(5);
+  std::cout << tree->search(5) << std::endl;
   return 0;
 }
