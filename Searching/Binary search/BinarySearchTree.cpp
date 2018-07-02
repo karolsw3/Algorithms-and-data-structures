@@ -22,6 +22,10 @@ class BinarySearchTree {
       }
     }
 
+    bool search (int value) {
+      return searchHelper(value, root);
+    }
+
   private:
     void insertHelper (int value, Node* root) {
       if (value > root->data) {
@@ -38,11 +42,30 @@ class BinarySearchTree {
         }
       }
     }
+
+    bool searchHelper (int value, Node* root) {
+      if (value > root->data) {
+        if (root->right->created) {
+          searchHelper(value, root->right);
+        } else {
+          return false;
+        }
+      } else if (value < root->data) {
+        if (root->left->created) {
+          searchHelper(value, root->left);
+        } else {
+          return false;
+        }
+      } else {
+        return true;
+      }
+    }
 };
 
 int main () {
   BinarySearchTree* tree = new BinarySearchTree();
   tree->insert(5);
   tree->insert(8);
+  std::cout << tree->search(6);
   return 0;
 }
