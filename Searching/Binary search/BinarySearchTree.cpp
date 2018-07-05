@@ -19,6 +19,7 @@ class BinarySearchTree {
         std::cout << "Created new root with value: " << value << std::endl;
         root = new Node(value);
       }
+      size++;
     }
 
     bool search (int value) {
@@ -27,6 +28,10 @@ class BinarySearchTree {
 
     void deleteValue (int value) {
       deleteHelper(value, root);
+    }
+
+    size_t getSize () {
+      return size;
     }
 
   private:
@@ -76,6 +81,7 @@ class BinarySearchTree {
         }
       } else {
         delete root;
+        size--;
         std::cout << "Node with value '" << value << "' deleted" << std::endl;
       }
     }
@@ -85,8 +91,8 @@ int main () {
   BinarySearchTree* tree = new BinarySearchTree();
   tree->insert(5);
   tree->insert(8);
-  std::cout << tree->search(5) << std::endl;
+  std::cout << tree->getSize() << std::endl;
   tree->deleteValue(5);
-  std::cout << tree->search(5) << std::endl;
+  std::cout << tree->getSize() << std::endl;
   return 0;
 }
