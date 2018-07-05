@@ -30,6 +30,14 @@ class BinarySearchTree {
       deleteHelper(value, root);
     }
 
+    int getMaxValue () {
+      return getMaxValueHelper(root);
+    }
+
+    int getMinValue () {
+      return getMinValueHelper(root);
+    }
+
     size_t getSize () {
       return size;
     }
@@ -70,6 +78,22 @@ class BinarySearchTree {
       }
     }
 
+    int getMaxValueHelper (Node* root) {
+      if (root->right) {
+        getMaxValueHelper(root->right);
+      } else {
+        return root->data;
+      }
+    }
+
+    int getMinValueHelper (Node* root) {
+      if (root->left) {
+        getMinValueHelper(root->left);
+      } else {
+        return root->data;
+      }
+    }
+
     void deleteHelper (int value, Node* root) {
       if (value > root->data) {
         if (root->right) {
@@ -91,8 +115,14 @@ int main () {
   BinarySearchTree* tree = new BinarySearchTree();
   tree->insert(5);
   tree->insert(8);
+  tree->insert(28);
+  tree->insert(38);
+  tree->insert(2);
+  tree->insert(8435);
   std::cout << tree->getSize() << std::endl;
   tree->deleteValue(5);
   std::cout << tree->getSize() << std::endl;
+  std::cout << tree->getMaxValue() << std::endl;
+  std::cout << tree->getMinValue() << std::endl;
   return 0;
 }
