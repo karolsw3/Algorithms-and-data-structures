@@ -4,9 +4,8 @@ struct Node {
   int data;
   Node *left;
   Node *right;
-  bool created;
 
-  Node (int value) : data(value), created(true) { }
+  Node (int value) : data(value) { }
 };
 
 class BinarySearchTree {
@@ -31,31 +30,32 @@ class BinarySearchTree {
     }
 
   private:
+    size_t size = 0;
     void insertHelper (int value, Node* root) {
       if (value > root->data) {
-        if (!root->right->created) {
-          root->right = new Node(value);
-        } else {
+        if (root->right) {
           insertHelper(value, root->right);
+        } else {
+          root->right = new Node(value);
         }
       } else {
-        if (!root->left->created) {
-          root->left = new Node(value);
-        } else {
+        if (root->left) {
           insertHelper(value, root->left);
+        } else {
+          root->left = new Node(value);
         }
       }
     }
 
     bool searchHelper (int value, Node* root) {
       if (value > root->data) {
-        if (root->right->created) {
+        if (root->right) {
           searchHelper(value, root->right);
         } else {
           return false;
         }
       } else if (value < root->data) {
-        if (root->left->created) {
+        if (root->left) {
           searchHelper(value, root->left);
         } else {
           return false;
@@ -67,11 +67,11 @@ class BinarySearchTree {
 
     void deleteHelper (int value, Node* root) {
       if (value > root->data) {
-        if (root->right->created) {
+        if (root->right) {
           searchHelper(value, root->right);
         }
       } else if (value < root->data) {
-        if (root->left->created) {
+        if (root->left) {
           searchHelper(value, root->left);
         }
       } else {
